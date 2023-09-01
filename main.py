@@ -3,7 +3,7 @@ from telebot import types
 import random
 import re
 
-token = '___' #сюда вставить TOKEN
+token = '' #сюда вставить TOKEN
 bot = telebot.TeleBot(token)
 info = 'Угадай слово, называя по одной букве или слово целиком. У тебя будет 8 попыток.'
 words_list = ['Сфинкс', 'Кордебалет', 'Формуляр', 'Хроника', 'Галера', 'Кафель', 'Фильтр', 'Башня', 'Кондитер',
@@ -75,10 +75,11 @@ def guess(message):
             else:
                 bot.send_message(message.chat.id, f'Нет такой буквы. Осталось {8 - counter[0]} попыток')
 
-    if counter[0] == 8 and ''.join(hidden_result).lower() != result.lower():
+    if counter[0] == 9 and ''.join(hidden_result).lower() != result.lower():
         bot.send_message(message.chat.id,
                          f'Попытки закончились. Ты проиграл. Было загадано слово {result.upper()}. Если хочешь сыграть еще раз, введи /start')
         result = '0'
+        counter = [0]
 
 
 bot.polling(non_stop=True)
